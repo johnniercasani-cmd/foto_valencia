@@ -33,6 +33,9 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/conf-available/*.conf
 
 COPY render-start.sh /usr/local/bin/render-start.sh
+RUN sed -i 's/\r$//' /usr/local/bin/render-start.sh
 RUN chmod +x /usr/local/bin/render-start.sh
 
-CMD ["render-start.sh"]
+EXPOSE 80
+
+CMD ["/usr/local/bin/render-start.sh"]
