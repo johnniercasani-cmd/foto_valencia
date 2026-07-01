@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <div class="card">
+    <div class="card" style="max-width: 900px;">
         <form action="{{ route('reservas.store') }}" method="POST">
             @csrf
 
@@ -132,30 +132,30 @@
             const servicioSelect = document.querySelector('select[name="servicio_id"]');
             const fechaInput = document.querySelector('input[name="fecha_reserva"]');
             const horaSelect = document.getElementById('hora_reserva');
-    
+
             function cargarHorarios() {
                 const servicioId = servicioSelect.value;
                 const fecha = fechaInput.value;
-    
+
                 horaSelect.innerHTML = '<option value="">Cargando horarios...</option>';
-    
+
                 if (!servicioId || !fecha) {
                     horaSelect.innerHTML = '<option value="">Primero seleccione servicio y fecha</option>';
                     return;
                 }
-    
+
                 fetch(`/api/horarios-disponibles?servicio_id=${servicioId}&fecha=${fecha}`)
                     .then(response => response.json())
                     .then(resultado => {
                         horaSelect.innerHTML = '';
-    
+
                         if (!resultado.success || resultado.data.length === 0) {
                             horaSelect.innerHTML = '<option value="">No hay horarios disponibles</option>';
                             return;
                         }
-    
+
                         horaSelect.innerHTML = '<option value="">Seleccione un horario</option>';
-    
+
                         resultado.data.forEach(horario => {
                             const option = document.createElement('option');
                             option.value = horario.hora;
@@ -168,7 +168,7 @@
                         horaSelect.innerHTML = '<option value="">Error al cargar horarios</option>';
                     });
             }
-    
+
             servicioSelect.addEventListener('change', cargarHorarios);
             fechaInput.addEventListener('change', cargarHorarios);
         });

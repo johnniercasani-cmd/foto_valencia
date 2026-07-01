@@ -71,6 +71,23 @@
 
         .content {
             padding: 35px 65px;
+            position: relative;
+            min-height: 600px;
+        }
+
+        .logo-fondo-modulo {
+            position: absolute;
+            top: 250px;
+            right: 70px;
+            width: 700px;
+            opacity: 0.5;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .content > *:not(.logo-fondo-modulo) {
+            position: relative;
+            z-index: 3;
         }
 
         .page-title {
@@ -226,6 +243,8 @@
         </div>
 
         <main class="content">
+            <img src="{{ asset('img/logo.png') }}" alt="Logo Foto Valencia" class="logo-fondo-modulo">
+
             @yield('content')
         </main>
     </div>
